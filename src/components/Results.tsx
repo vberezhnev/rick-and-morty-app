@@ -1,7 +1,7 @@
 import { QueryClient, useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { CharacterItem } from ".//CharacterItem";
-import { Input, TextField } from "@mui/material";
+import { Input } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
 import { fetchCharacters } from "../helpers/fetchCharacters";
 import { Container, Item, ItemContainer, Paper, Wrapper } from "./UI/index";
