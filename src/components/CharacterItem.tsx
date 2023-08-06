@@ -1,6 +1,12 @@
-import { Image, Text, Title } from "./UI/index";
+import { Image, Text, Title } from "@/UI/index";
 import { ICharacterItem } from "../types/ICharacterItem";
 
+/* interface ICharacterItem {
+ *
+ * }
+ *  */
+
+// TODO: add types & remove any
 export const CharacterItem = (item: any) => {
   const { name, status, gender, episode, image }: ICharacterItem = {
     ...item.item,
