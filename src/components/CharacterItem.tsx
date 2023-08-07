@@ -1,4 +1,4 @@
-import { Image, Text, Title } from "@/UI/index";
+import { Image, Text, Title } from "./UI/index";
 import { ICharacterItem } from "../types/ICharacterItem";
 
 /* interface ICharacterItem {

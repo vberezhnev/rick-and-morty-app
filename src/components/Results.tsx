@@ -1,10 +1,12 @@
 import { QueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { CharacterItem } from "./CharacterItem";
+
 import { Input } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
-import { Container, Item, ItemContainer, Paper, Wrapper } from "@/UI/index";
-import { useFetchData } from "@/hooks/useFetchData";
+
+import { Container, Item, ItemContainer, Paper, Wrapper } from "./UI/index";
+import { CharacterItem } from "./CharacterItem";
+import { useFetchData } from "../hooks/useFetchData";
 
 export const Results = () => {
   const queryClient = new QueryClient();
