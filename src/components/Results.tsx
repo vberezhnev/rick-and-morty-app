@@ -17,6 +17,8 @@ export const Results = () => {
     queryClient
   );
 
+  console.log(queryClient);
+
   return (
     <Container>
       <Wrapper>
@@ -37,7 +39,8 @@ export const Results = () => {
               )}
             />
             <ItemContainer>
-              {data.results.map((item, id) => {
+              {data.results.map((item: any, id: number) => {
+                console.log(item);
                 return (
                   <Item key={id}>
                     <CharacterItem item={item} />

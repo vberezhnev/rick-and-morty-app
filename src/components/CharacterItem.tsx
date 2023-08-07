@@ -3,8 +3,7 @@ import { ICharacterItem } from "../types/ICharacterItem";
 
 /* interface ICharacterItem {
  *
- * }
- *  */
+ * } */
 
 // TODO: add types & remove any
 export const CharacterItem = (item: any) => {

@@ -1,8 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { fetchCharacters } from "../helpers/fetchCharacters";
+import { fetchCharacters } from "@/helpers/fetchCharacters";
 
-export const useFetchData = (page, searchValue, queryClient) => {
+export const useFetchData = (
+  page: number,
+  searchValue: string,
+  queryClient: any
+) => {
   const { isLoading, isError, data, isPreviousData } = useQuery(
     ["character", page, searchValue],
     () => fetchCharacters(page, searchValue),
