@@ -1,53 +1,35 @@
-import { QueryClient, useQuery } from "@tanstack/react-query";
-import { useState, useEffect } from "react";
-import { CharacterItem } from ".//CharacterItem";
-import { Input } from "@mui/material";
-import Autocomplete from "@mui/material/Autocomplete";
-import { fetchCharacters } from "../helpers/fetchCharacters";
+import { QueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+
 import { Container, Item, ItemContainer, Paper, Wrapper } from "./UI/index";
+import { Input, Autocomplete, CircularProgress } from "@mui/material";
+
+import { CharacterItem } from "./CharacterItem";
+import { useFetchData } from "../hooks/useFetchData";
+import { useDebounce } from "../hooks/useDebounce";
 
 export const Results = () => {
   const queryClient = new QueryClient();
   const [page, setPage] = useState(0);
   const [searchValue, setSearchValue] = useState("");
+  const debouncedSearchValue = useDebounce(searchValue, 500);
 
-  const { status, data, error, isLoading, isPreviousData } = useQuery(
-    ["character", page, searchValue],
-    () => fetchCharacters(page, searchValue),
-    {
-      keepPreviousData: true,
-      staleTime: 5000,
-    }
+  const { isLoading, isError, data, isPreviousData } = useFetchData(
+    page,
+    debouncedSearchValue,
+    queryClient
   );
-
-  // Prefetch the next page
-  useEffect(() => {
-    if (!isPreviousData && data?.info?.next) {
-      queryClient.prefetchQuery({
-        queryKey: ["character", page + 1],
-        queryFn: () => fetchCharacters(page + 1),
-      });
-    }
-  }, [data, isPreviousData, page, queryClient]);
-
-  useEffect(() => {
-    queryClient.prefetchQuery(["character", 1, searchValue], () =>
-      fetchCharacters(1, searchValue)
-    );
-  }, [searchValue]);
 
   return (
     <Container>
       <Wrapper>
-        {isLoading || error ? (
-          <div>Wait for it...</div>
+        {isLoading ? (
+          <CircularProgress />
         ) : (
           <Paper>
-            {" "}
             <Autocomplete
-              freeSolo
-              options={data.results}
-              value={searchValue}
+              options={data?.results ?? []}
+              value={debouncedSearchValue}
               onInputChange={(event, newValue) => {
                 setSearchValue(newValue);
               }}
@@ -56,13 +38,17 @@ export const Results = () => {
               )}
             />
             <ItemContainer>
-              {data.results.map((item, id) => {
-                return (
-                  <Item key={id}>
-                    <CharacterItem item={item} />
-                  </Item>
-                );
-              })}
+              {data?.results?.length ? (
+                data.results.map((item: any, id: number) => {
+                  return (
+                    <Item key={id}>
+                      <CharacterItem item={item} />
+                    </Item>
+                  );
+                })
+              ) : (
+                <div>There's nothing</div>
+              )}
             </ItemContainer>
             <div>Current Page: {page + 1}</div>
             <button
