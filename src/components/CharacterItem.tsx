@@ -1,17 +1,13 @@
 import { Image, Text, Title, Flex, Block } from "./UI/index";
+import { ICharacter } from "../types/ICharacter";
 import { ICharacterItem } from "../types/ICharacterItem";
 
-/* interface ICharacterItem {
- *
- * } */
-
-// TODO: add types & remove any
-export const CharacterItem = (item: any) => {
-  const { name, status, gender, episode, image }: ICharacterItem = {
+export const CharacterItem = (item: ICharacterItem) => {
+  const { name, status, gender, episode, image }: ICharacter = {
     ...item.item,
   };
 
-  // Episode counter
+  // Total episode counter
   let totalEpisodes = 0;
   for (let properties in episode) {
     totalEpisodes += 1;
@@ -22,7 +18,6 @@ export const CharacterItem = (item: any) => {
       <Image src={image}></Image>
       <Block $margin="0px 0px 0px 25px">
         <Title>{name}</Title>
-        {"\n"}
         <Text>
           <b>Status:</b> {status}
         </Text>

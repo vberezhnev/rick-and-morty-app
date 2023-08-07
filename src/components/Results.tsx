@@ -2,7 +2,7 @@ import { QueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
 import { Container, Item, ItemContainer, Paper, Wrapper } from "./UI/index";
-import { Input, Autocomplete } from "@mui/material";
+import { Input, Autocomplete, CircularProgress } from "@mui/material";
 
 import { CharacterItem } from "./CharacterItem";
 import { useFetchData } from "../hooks/useFetchData";
@@ -24,7 +24,7 @@ export const Results = () => {
     <Container>
       <Wrapper>
         {isLoading ? (
-          <div>Wait for it...</div>
+          <CircularProgress />
         ) : (
           <Paper>
             <Autocomplete
