@@ -21,8 +21,6 @@ export const Results = () => {
     queryClient
   );
 
-  console.log(data);
-
   return (
     <Container>
       <Wrapper>
@@ -30,20 +28,18 @@ export const Results = () => {
           <div>Wait for it...</div>
         ) : (
           <Paper>
-            {" "}
             <Autocomplete
-              options={data.results}
+              options={data?.results ?? []}
               value={debouncedSearchValue}
               onInputChange={(event, newValue) => {
                 setSearchValue(newValue);
-                console.log(event);
               }}
               renderInput={(params) => (
                 <Input {...params} placeholder="Search characters..." />
               )}
             />
             <ItemContainer>
-              {data ? (
+              {data?.results?.length ? (
                 data.results.map((item: any, id: number) => {
                   return (
                     <Item key={id}>
@@ -52,7 +48,7 @@ export const Results = () => {
                   );
                 })
               ) : (
-                <div>I am sorry</div>
+                <div>There's nothing</div>
               )}
             </ItemContainer>
             <div>Current Page: {page + 1}</div>
