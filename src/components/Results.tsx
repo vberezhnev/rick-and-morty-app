@@ -1,10 +1,9 @@
 import { QueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
-import { Input } from "@mui/material";
-import Autocomplete from "@mui/material/Autocomplete";
-
 import { Container, Item, ItemContainer, Paper, Wrapper } from "./UI/index";
+import { Input, Autocomplete } from "@mui/material";
+
 import { CharacterItem } from "./CharacterItem";
 import { useFetchData } from "../hooks/useFetchData";
 import { useDebounce } from "../hooks/useDebounce";
